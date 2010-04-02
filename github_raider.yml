@@ -53,3 +53,5 @@ users:
     only: prawn
   - user: thorny-sun
     only: prawnto
+  - user: mojombo
+    only: chronic
