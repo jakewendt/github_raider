@@ -4,13 +4,16 @@ require 'rubygems'
 require 'open-uri'
 require 'json'
 require 'fileutils'
+require 'erb'
+
+#	config = YAML::load(ERB.new(IO.read('config/fed_ex.yml')).result)
 
 #	eventually this'll be in a yaml config file or something
 #	Probably add :include or :exclude keys as well
 GITHUB = {
 	:repo  => "/Users/jakewendt/github_repo",	#	don't use the ~
 	:login => 'jakewendt',	#	distinguish yourself
-	:users => ['jakewendt','breakpointer','gunark','grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
+	:users => ['jakewendt','breakpointer','gunark']	#,'grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
 }
 
 
@@ -35,7 +38,7 @@ GITHUB[:users].each do |user|
 
 	if File.exists?("#{GITHUB[:repo]}/#{user}")
 		if File.directory?("#{GITHUB[:repo]}/#{user}")
-			Dir.chdir("#{GITHUB[:repo]}/#{user}")
+#			Dir.chdir("#{GITHUB[:repo]}/#{user}")
 		else
 			puts
 			puts	"#{GITHUB[:repo]}/#{user} is not a directory?  Skipping user"
@@ -46,6 +49,7 @@ GITHUB[:users].each do |user|
 		puts "#{GITHUB[:repo]}/#{user} does not exist.  Creating..."
 		FileUtils.mkdir("#{GITHUB[:repo]}/#{user}") 
 	end
+	Dir.chdir("#{GITHUB[:repo]}/#{user}")
 
 	json = `curl http://github.com/api/v1/json/#{user}`
 	
