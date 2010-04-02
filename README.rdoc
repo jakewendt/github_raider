@@ -1,0 +1,4 @@
+= GitHub Raider
+
+Do you just have to have a local copy of all of your repositories?  Or all of your favorite developer's repositories?  Well now you can!  Well, you always could, but now you can do it with one quick command.  Well, maybe you could do that before too.  Whatever.
+
