@@ -11,7 +11,7 @@ users:
 #  - gnufied
 #  - makandra
   - user: peter
-    only: html_test
+    only: [ html_test, javascript-101 ]
 #  - aaronchi
 #  - user: wayneeseguin
 #    except: ruby
