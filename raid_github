@@ -19,6 +19,7 @@ GITHUB = YAML::load(ERB.new(IO.read('github_raider.yml')).result)
 #}
 #
 
+GITHUB['repo'] = File.expand_path(GITHUB['repo'])
 
 pwd = Dir.pwd
 if File.exists?(GITHUB['repo'])
