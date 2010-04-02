@@ -1,8 +1,9 @@
 repo: ~/github_repo
 login: jakewendt
 users: 
-#  - jakewendt
-#  - breakpointer
+  - jakewendt
+  - user: breakpointer
+    only: surveyor
   - gunark
 #  - grimen
 #  - thoughtbot
