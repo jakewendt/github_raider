@@ -1,0 +1,16 @@
+repo: "/Users/jakewendt/github_repo"
+login: jakewendt
+users: 
+  - jakewendt
+  - breakpointer
+  - gunark
+  - grimen
+  - thoughtbot
+  - user: chinasaur
+    except: rails
+  - gnufied
+  - makandra
+  - peter
+  - aaronchi
+  - user: wayneeseguin
+    except: ruby
