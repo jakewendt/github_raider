@@ -6,18 +6,7 @@ require 'json'
 require 'fileutils'
 require 'erb'
 
-#	config = YAML::load(ERB.new(IO.read('config/fed_ex.yml')).result)
-
 GITHUB = YAML::load(ERB.new(IO.read('github_raider.yml')).result)
-
-#	eventually this'll be in a yaml config file or something
-#	Probably add :include or :exclude keys as well
-#GITHUB = {
-#	:repo  => "/Users/jakewendt/github_repo",	#	don't use the ~
-#	:login => 'jakewendt',	#	distinguish yourself
-#	:users => ['jakewendt','breakpointer','gunark']	#,'grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
-#}
-#
 
 GITHUB['repo'] = File.expand_path(GITHUB['repo'])
 
@@ -51,9 +40,7 @@ GITHUB['users'].each do |_user|
 	puts user
 
 	if File.exists?("#{GITHUB['repo']}/#{user}")
-		if File.directory?("#{GITHUB['repo']}/#{user}")
-#			Dir.chdir("#{GITHUB['repo']}/#{user}")
-		else
+		unless File.directory?("#{GITHUB['repo']}/#{user}")
 			puts
 			puts	"#{GITHUB['repo']}/#{user} is not a directory?  Skipping user"
 			puts
@@ -77,9 +64,9 @@ GITHUB['users'].each do |_user|
 		url << "#{repo['owner']}/#{repo['name']}.git"
 		puts url
 	
-		if File.exists?(repo['name'])
+		if File.exists?("#{GITHUB['repo']}/#{user}/#{repo['name']}")
 			puts "#{repo['name']} exists.  Updating."
-			if File.directory?(repo['name'])
+			if File.directory?("#{GITHUB['repo']}/#{user}/#{repo['name']}")
 				Dir.chdir("#{GITHUB['repo']}/#{user}/#{repo['name']}")
 				puts `git pull`
 				Dir.chdir("#{GITHUB['repo']}/#{user}")
