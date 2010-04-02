@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
+require 'net/http'
 require 'open-uri'
 require 'json'
 require 'fileutils'
@@ -52,7 +53,11 @@ GITHUB['users'].each do |_user|
 	end
 	Dir.chdir("#{GITHUB['repo']}/#{user}")
 
-	json = `curl http://github.com/api/v1/json/#{user}`
+#	json = `curl http://github.com/api/v1/json/#{user}`
+
+	r = Net::HTTP.get_response  "github.com","/api/v1/json/#{user}"
+	next unless r.code.to_s == '200'
+	json = r.body
 	
 	response = JSON.parse(json)
 	#	happens for users without repos

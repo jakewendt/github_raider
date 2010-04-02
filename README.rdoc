@@ -4,5 +4,4 @@ Do you just have to have a local copy of all of your repositories?  Or all of yo
 
 == To Do
 
-- replace the curl command with a Net::HTTP or something so can control failures.  If the user no longer exists, it return HTML rather than json which causes parsing failure.  (Same happens when the developer mistypes a username!)
-
+- nothing at this time
