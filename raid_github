@@ -8,54 +8,70 @@ require 'erb'
 
 #	config = YAML::load(ERB.new(IO.read('config/fed_ex.yml')).result)
 
+GITHUB = YAML::load(ERB.new(IO.read('github_raider.yml')).result)
+
 #	eventually this'll be in a yaml config file or something
 #	Probably add :include or :exclude keys as well
-GITHUB = {
-	:repo  => "/Users/jakewendt/github_repo",	#	don't use the ~
-	:login => 'jakewendt',	#	distinguish yourself
-	:users => ['jakewendt','breakpointer','gunark']	#,'grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
-}
-
+#GITHUB = {
+#	:repo  => "/Users/jakewendt/github_repo",	#	don't use the ~
+#	:login => 'jakewendt',	#	distinguish yourself
+#	:users => ['jakewendt','breakpointer','gunark']	#,'grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
+#}
+#
 
 
 pwd = Dir.pwd
-if File.exists?(GITHUB[:repo])
-	if File.directory?(GITHUB[:repo])
-		Dir.chdir(GITHUB[:repo])
+if File.exists?(GITHUB['repo'])
+	if File.directory?(GITHUB['repo'])
+		Dir.chdir(GITHUB['repo'])
 	else
 		puts
-		puts	"#{GITHUB[:repo]} is not a directory?"
+		puts	"#{GITHUB['repo']} is not a directory?"
 		puts
 		exit
 	end
 else
-	puts "#{GITHUB[:repo]} does not exist.  Creating..."
-	FileUtils.mkdir(GITHUB[:repo]) 
+	puts "#{GITHUB['repo']} does not exist.  Creating..."
+	FileUtils.mkdir(GITHUB['repo']) 
 end
 
-GITHUB[:users].each do |user|
+GITHUB['users'].each do |_user|
+	inclusions = []
+	exclusions = []
+	user = case _user
+		when String then _user
+		when Hash   then _user['user']
+	end
+	if _user.is_a?(Hash)
+		inclusions = _user['only'].to_a
+		exclusions = _user['except'].to_a
+	end
+
 	puts user
 
-	if File.exists?("#{GITHUB[:repo]}/#{user}")
-		if File.directory?("#{GITHUB[:repo]}/#{user}")
-#			Dir.chdir("#{GITHUB[:repo]}/#{user}")
+	if File.exists?("#{GITHUB['repo']}/#{user}")
+		if File.directory?("#{GITHUB['repo']}/#{user}")
+#			Dir.chdir("#{GITHUB['repo']}/#{user}")
 		else
 			puts
-			puts	"#{GITHUB[:repo]}/#{user} is not a directory?  Skipping user"
+			puts	"#{GITHUB['repo']}/#{user} is not a directory?  Skipping user"
 			puts
 			next
 		end
 	else
-		puts "#{GITHUB[:repo]}/#{user} does not exist.  Creating..."
-		FileUtils.mkdir("#{GITHUB[:repo]}/#{user}") 
+		puts "#{GITHUB['repo']}/#{user} does not exist.  Creating..."
+		FileUtils.mkdir("#{GITHUB['repo']}/#{user}") 
 	end
-	Dir.chdir("#{GITHUB[:repo]}/#{user}")
+	Dir.chdir("#{GITHUB['repo']}/#{user}")
 
 	json = `curl http://github.com/api/v1/json/#{user}`
 	
 	response = JSON.parse(json)
 	response['user']['repositories'].each do |repo|
-		url = ( response['user']['login'] == (GITHUB[:login]||'') ) ? 
+		next if !exclusions.empty? &&  exclusions.include?(repo['name'])
+		next if !inclusions.empty? && !inclusions.include?(repo['name'])
+
+		url = ( response['user']['login'] == (GITHUB['login']||'') ) ? 
 			"git@github.com:" : "git://github.com/"
 		url << "#{repo['owner']}/#{repo['name']}.git"
 		puts url
@@ -63,9 +79,9 @@ GITHUB[:users].each do |user|
 		if File.exists?(repo['name'])
 			puts "#{repo['name']} exists.  Updating."
 			if File.directory?(repo['name'])
-				Dir.chdir("#{GITHUB[:repo]}/#{user}/#{repo['name']}")
+				Dir.chdir("#{GITHUB['repo']}/#{user}/#{repo['name']}")
 				puts `git pull`
-				Dir.chdir("#{GITHUB[:repo]}/#{user}")
+				Dir.chdir("#{GITHUB['repo']}/#{user}")
 			else
 				"#{repo['name']} is not a directory.  Skipping."
 			end
@@ -74,6 +90,6 @@ GITHUB[:users].each do |user|
 			puts `git clone #{url}`
 		end
 	end
-	Dir.chdir("#{GITHUB[:repo]}")
+	Dir.chdir("#{GITHUB['repo']}")
 end
 Dir.chdir(pwd)

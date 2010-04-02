@@ -1,16 +1,17 @@
 repo: "/Users/jakewendt/github_repo"
 login: jakewendt
 users: 
-  - jakewendt
-  - breakpointer
+#  - jakewendt
+#  - breakpointer
   - gunark
-  - grimen
-  - thoughtbot
+#  - grimen
+#  - thoughtbot
   - user: chinasaur
     except: rails
-  - gnufied
-  - makandra
-  - peter
-  - aaronchi
-  - user: wayneeseguin
-    except: ruby
+#  - gnufied
+#  - makandra
+  - user: peter
+    only: html_test
+#  - aaronchi
+#  - user: wayneeseguin
+#    except: ruby
