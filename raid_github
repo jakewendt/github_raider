@@ -5,11 +5,15 @@ require 'open-uri'
 require 'json'
 require 'fileutils'
 
+#	eventually this'll be in a yaml config file or something
+#	Probably add :include or :exclude keys as well
 GITHUB = {
 	:repo  => "/Users/jakewendt/github_repo",	#	don't use the ~
 	:login => 'jakewendt',	#	distinguish yourself
 	:users => ['jakewendt','breakpointer','gunark','grimen','thoughtbot','chinasaur','gnufied','makandra','peter','aaronchi','wayneeseguin']
 }
+
+
 
 pwd = Dir.pwd
 if File.exists?(GITHUB[:repo])
