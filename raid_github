@@ -55,6 +55,8 @@ GITHUB['users'].each do |_user|
 	json = `curl http://github.com/api/v1/json/#{user}`
 	
 	response = JSON.parse(json)
+	#	happens for users without repos
+	next if response['user']['repositories'].nil?
 	response['user']['repositories'].each do |repo|
 		next if !exclusions.empty? &&  exclusions.include?(repo['name'])
 		next if !inclusions.empty? && !inclusions.include?(repo['name'])
