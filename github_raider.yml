@@ -4,15 +4,52 @@ users:
   - jakewendt
   - user: breakpointer
     only: surveyor
-  - gunark
-#  - grimen
-#  - thoughtbot
+  - user: gunark
+    only: rubycas-client
+  - user: grimen
+    only: validatious-on-rails
+  - user: thoughtbot
+    only: factory_girl
   - user: chinasaur
-    except: rails
-#  - gnufied
-#  - makandra
+    only: rdoc_rails
+  - user: gnufied
+    only: backgroundrb
+  - user: makandra
+    only: aegis
   - user: peter
-    only: [ html_test, javascript-101 ]
-#  - aaronchi
-#  - user: wayneeseguin
+    only: html_test
+  - user: aaronchi
+    only: jrails
+  - user: wayneeseguin
+    only: rvn
 #    except: ruby
+  - danahern
+  - armagad
+  - user: Shopify
+    only: active_shipping
+  - user: ryanb
+    only: acts-as-list
+  - user: relevance
+    only: rcov
+  - user: floehopper
+    only: mocha
+  - user: jquery
+    only: [ jquery, jquery-ui ]
+  - user: thenduks
+    only: flot
+  - user: mislav
+    only: will_paginate
+  - user: bansalakhil
+    only: aws_sdb_proxy
+  - user: remi
+    only: use_db
+  - user: rails
+    only: rails
+  - user: maccman
+    only: [ juggernaut_gem, juggernaut_plugin ]
+  - user: markaby
+    only: markaby
+  - user: sandal
+    only: prawn
+  - user: thorny-sun
+    only: prawnto
