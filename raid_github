@@ -6,6 +6,7 @@ require 'open-uri'
 require 'json'
 require 'fileutils'
 require 'erb'
+require 'yaml'
 
 GITHUB = YAML::load(ERB.new(IO.read('github_raider.yml')).result)
 
@@ -34,8 +35,8 @@ GITHUB['users'].each do |_user|
 		when Hash   then _user['user']
 	end
 	if _user.is_a?(Hash)
-		inclusions = _user['only'].to_a
-		exclusions = _user['except'].to_a
+		inclusions = [_user['only']].flatten
+		exclusions = [_user['except']].flatten
 	end
 
 	puts user
