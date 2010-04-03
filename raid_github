@@ -6,6 +6,7 @@ require 'open-uri'
 require 'json'
 require 'fileutils'
 require 'erb'
+require 'yaml'
 
 GITHUB = YAML::load(ERB.new(IO.read('github_raider.yml')).result)
 
