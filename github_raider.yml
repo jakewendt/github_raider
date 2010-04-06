@@ -21,7 +21,7 @@ users:
   - user: aaronchi
     only: jrails
   - user: wayneeseguin
-    only: rvn
+    only: rvm
 #    except: ruby
   - danahern
   - armagad
