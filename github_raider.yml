@@ -55,3 +55,23 @@ users:
     only: prawnto
   - user: mojombo
     only: chronic
+  - user: chris
+    only: better_nested_set
+  - user: m4n
+    only: flags_column
+  - user: ptb
+    only: geokit
+  - user: fauna
+    only: has_many_polymorphs
+  - technoweenie
+  - user: jamesgolick
+    only: markaby
+  - user: bruce
+    only: bitmask-attribute
+  - user: tekin
+    only: file_column
+  - user: jackdempsey
+    only: acts_as_commentable
+  - user: rares
+    only: netflix
+
