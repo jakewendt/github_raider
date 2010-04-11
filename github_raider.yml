@@ -9,7 +9,7 @@ users:
   - user: grimen
     only: validatious-on-rails
   - user: thoughtbot
-    only: factory_girl
+    only: [ factory_girl, paperclip ]
   - user: chinasaur
     only: rdoc_rails
   - user: gnufied
