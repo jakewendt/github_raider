@@ -44,7 +44,7 @@ users:
   - user: remi
     only: use_db
   - user: rails
-    only: rails
+    only: [ rails, ssl_requirement ]
   - user: maccman
     only: [ juggernaut_gem, juggernaut_plugin ]
   - user: markaby
@@ -74,4 +74,13 @@ users:
     only: acts_as_commentable
   - user: rares
     only: netflix
+  - user: infused
+    only: test_injector
+
+  - user: brettstimmerman
+    #  lace is Lightweight Ajaxian Communication Engine (PHP)
+    only: lace
+  - user: handlino
+    #  chatlino is a rails and juggernaut chat demo app
+    only: chatlino
 
