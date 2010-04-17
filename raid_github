@@ -61,6 +61,8 @@ GITHUB['users'].each do |_user|
 	json = r.body
 	
 	response = JSON.parse(json)
+	File.open("#{user}.yml",'w') { |f| f.puts response.to_yaml }
+
 	#	happens for users without repos
 	next if response['user']['repositories'].nil?
 	response['user']['repositories'].each do |repo|
