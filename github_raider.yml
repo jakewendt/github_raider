@@ -83,4 +83,5 @@ users:
   - user: handlino
     #  chatlino is a rails and juggernaut chat demo app
     only: chatlino
-
+  - user: tobi
+    only: liquid
