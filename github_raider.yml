@@ -2,6 +2,7 @@ repo: ~/github_repo
 login: jakewendt
 users: 
   - jakewendt
+    except: empty_repo
   - user: breakpointer
     only: surveyor
   - user: gunark
@@ -64,6 +65,7 @@ users:
   - user: fauna
     only: has_many_polymorphs
   - technoweenie
+    except: [ fake_gmaps, mechano ]
   - user: jamesgolick
     only: markaby
   - user: bruce
