@@ -87,3 +87,7 @@ users:
     only: chatlino
   - user: tobi
     only: liquid
+  - user: codeprimate
+    only: acts_as_translatable
+  - user: azul
+    only: acts_as_translatable
