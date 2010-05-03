@@ -35,8 +35,8 @@ GITHUB['users'].each do |_user|
 		when Hash   then _user['user']
 	end
 	if _user.is_a?(Hash)
-		inclusions = [_user['only']].flatten
-		exclusions = [_user['except']].flatten
+		inclusions = [_user['only']].flatten   if _user['only']
+		exclusions = [_user['except']].flatten if _user['except']
 	end
 
 	puts user
